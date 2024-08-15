@@ -814,3 +814,22 @@ Age Range       | 0 - 3  | 4 - 8 | 9 - 18 | 19 - 28 | 29 - 40 | 41 - 60 | 60 - 8
 ----------------|-------:|------:|-------:|--------:|--------:|--------:|--------:|--------:|
 MAE             | 1.52   | 3.06  | 4.82   | 4.99    | 5.43    | 4.94    | 6.17    | 9.91    |
 Gender Accuracy | 0.69   | 0.80  | 0.88   | 0.96    | 0.97    | 0.97    | 0.96    | 0.9     |
+
+
+--
+The files added to the project are named `ageGenderRecognitionEmotion.html` and `webcamAgeGenderRecognitionEmotion.html`. These files contain age, gender and facial expression recognition features. `ageGenderRecognitionEmotion.html` performs these detections on an image file, while `webcamAgeGenderRecognitionEmotion.html` performs these detections in real time through a webcam. These files allow you to perform advanced facial analysis in the browser using the `face-api.js` library.
+--
+
+Changes: `webcamFaceExpressionRecognition.html`
+
+Some important changes have been made to this updated file, `webcamFaceExpressionRecognition.html`. Below is a description of the changes:
+
+1. **Display of Dominant Facial Expression:**
+   - After facial expressions are detected, the function `getHighestEmotion` has been added to determine the most dominant facial expression. This function finds the expression with the highest percentage among the detected facial expression results and this information is presented to the user.
+
+2. **Facial Expression Text Displayed in Boxes:**
+   - For each detected face, the facial expression has started to be added as text on the boxes. In this way, the user can directly see which facial expression is dominant.
+
+3. **Performance Improvements:**
+   - The use of the `setTimeout` function has been optimized. The processing time and FPS values for each frame have been updated, providing a smoother and more performant experience.
+   - Increased input size (`416 x 416`), resulting in higher accuracy.
