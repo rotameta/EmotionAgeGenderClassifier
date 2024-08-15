@@ -1,157 +1,131 @@
+Tabii! İşte metnin Türkçeye çevirisi:
+
+---
+
 # face-api.js
 
-[![Build Status](https://travis-ci.org/justadudewhohacks/face-api.js.svg?branch=master)](https://travis-ci.org/justadudewhohacks/face-api.js)
-[![Slack](https://slack.bri.im/badge.svg)](https://slack.bri.im)
+## Eğitimler
 
-**JavaScript face recognition API for the browser and nodejs implemented on top of tensorflow.js core ([tensorflow/tfjs-core](https://github.com/tensorflow/tfjs))**
+* **[face-api.js — Tarayıcıda tensorflow.js ile Yüz Tanıma İçin JavaScript API'si](https://itnext.io/face-api-js-javascript-api-for-face-recognition-in-the-browser-with-tensorflow-js-bcc2a6c4cf07)**
+* **[Realtime JavaScript Yüz Takibi ve Yüz Tanıma: face-api.js'in MTCNN Yüz Dedektörü Kullanarak](https://itnext.io/realtime-javascript-face-tracking-and-face-recognition-using-face-api-js-mtcnn-face-detector-d924dd8b5740)**
+* **[Gerçek Zamanlı Webcam Yüz Tespiti ve Duygu Tanıma - Video](https://youtu.be/CVClHLwv-4I)**
+* **[JavaScript ile Kolay Yüz Tanıma Eğitimi - Video](https://youtu.be/AZ4PdALMqx0)**
+* **[face-api.js'i Vue.js ve Electron ile Kullanma](https://medium.com/@andreas.schallwig/do-not-laugh-a-simple-ai-powered-game-3e22ad0f8166)**
+* **[İnsanlara Maske Ekleme - Gant Laborde Jason ile Öğrenin](https://www.learnwithjason.dev/fun-with-machine-learning-pt-2)**
 
-![faceapi](https://user-images.githubusercontent.com/31125521/57224752-ad3dc080-700a-11e9-85b9-1357b9f9bca4.gif)
+## İçindekiler
 
-## **[Click me for Live Demos!](https://justadudewhohacks.github.io/face-api.js/)**
+* **[Özellikler](#features)**
+* **[Örnekleri Çalıştırma](#running-the-examples)**
+* **[Tarayıcı için face-api.js](#face-api.js-for-the-browser)**
+* **[Nodejs için face-api.js](#face-api.js-for-nodejs)**
+* **[Kullanım](#getting-started)**
+  * **[Modelleri Yükleme](#getting-started-loading-models)**
+  * **[Yüksek Seviyeli API](#high-level-api)**
+  * **[Tespit Sonuçlarını Gösterme](#getting-started-displaying-detection-results)**
+  * **[Yüz Tespiti Seçenekleri](#getting-started-face-detection-options)**
+  * **[Yardımcı Sınıflar](#getting-started-utility-classes)**
+  * **[Diğer Yararlı Yardımcı](#other-useful-utility)**
+* **[Mevcut Modeller](#models)**
+  * **[Yüz Tespiti](#models-face-detection)**
+  * **[Yüz Landmark Tespiti](#models-face-landmark-detection)**
+  * **[Yüz Tanıma](#models-face-recognition)**
+  * **[Yüz İfade Tanıma](#models-face-expression-recognition)**
+  * **[Yaş Tahmini ve Cinsiyet Tanıma](#models-age-and-gender-recognition)**
+* **[API Belgeleri](https://justadudewhohacks.github.io/face-api.js/docs/globals.html)**
 
-## Tutorials
+# Çalıştırma
 
-* **[face-api.js — JavaScript API for Face Recognition in the Browser with tensorflow.js](https://itnext.io/face-api-js-javascript-api-for-face-recognition-in-the-browser-with-tensorflow-js-bcc2a6c4cf07)**
-* **[Realtime JavaScript Face Tracking and Face Recognition using face-api.js’ MTCNN Face Detector](https://itnext.io/realtime-javascript-face-tracking-and-face-recognition-using-face-api-js-mtcnn-face-detector-d924dd8b5740)**
-* **[Realtime Webcam Face Detection And Emotion Recognition - Video](https://youtu.be/CVClHLwv-4I)**
-* **[Easy Face Recognition Tutorial With JavaScript - Video](https://youtu.be/AZ4PdALMqx0)**
-* **[Using face-api.js with Vue.js and Electron](https://medium.com/@andreas.schallwig/do-not-laugh-a-simple-ai-powered-game-3e22ad0f8166)**
-* **[Add Masks to People - Gant Laborde on Learn with Jason](https://www.learnwithjason.dev/fun-with-machine-learning-pt-2)**
+Depoyu klonlayın:
 
-## Table of Contents
-
-* **[Features](#features)**
-* **[Running the Examples](#running-the-examples)**
-* **[face-api.js for the Browser](#face-api.js-for-the-browser)**
-* **[face-api.js for Nodejs](#face-api.js-for-nodejs)**
-* **[Usage](#getting-started)**
-  * **[Loading the Models](#getting-started-loading-models)**
-  * **[High Level API](#high-level-api)**
-  * **[Displaying Detection Results](#getting-started-displaying-detection-results)**
-  * **[Face Detection Options](#getting-started-face-detection-options)**
-  * **[Utility Classes](#getting-started-utility-classes)**
-  * **[Other Useful Utility](#other-useful-utility)**
-* **[Available Models](#models)**
-  * **[Face Detection](#models-face-detection)**
-  * **[Face Landmark Detection](#models-face-landmark-detection)**
-  * **[Face Recognition](#models-face-recognition)**
-  * **[Face Expression Recognition](#models-face-expression-recognition)**
-  * **[Age Estimation and Gender Recognition](#models-age-and-gender-recognition)**
-* **[API Documentation](https://justadudewhohacks.github.io/face-api.js/docs/globals.html)**
-
-# Features
-
-## Face Recognition
-
-![face-recognition](https://user-images.githubusercontent.com/31125521/57297377-bfcdfd80-70cf-11e9-8afa-2044cb167bff.gif)
-
-## Face Landmark Detection
-
-![face_landmark_detection](https://user-images.githubusercontent.com/31125521/57297731-b1ccac80-70d0-11e9-9bd7-59d77f180322.jpg)
-
-## Face Expression Recognition
-
-![preview_face-expression-recognition](https://user-images.githubusercontent.com/31125521/50575270-f501d080-0dfb-11e9-9676-8f419efdade4.png)
-
-## Age Estimation & Gender Recognition
-
-![age_gender_recognition](https://user-images.githubusercontent.com/31125521/57297736-b5603380-70d0-11e9-873d-8b6c7243eb64.jpg)
-
-<a name="running-the-examples"></a>
-
-# Running the Examples
-
-Clone the repository:
-
-``` bash
+```bash
 git clone https://github.com/justadudewhohacks/face-api.js.git
 ```
 
-## Running the Browser Examples
+## Tarayıcı Örneklerini Çalıştırma
 
-``` bash
+```bash
 cd face-api.js/examples/examples-browser
 npm i
 npm start
 ```
 
-Browse to http://localhost:3000/.
+http://localhost:3000/ adresine göz atın.
 
-## Running the Nodejs Examples
+## Nodejs Örneklerini Çalıştırma
 
-``` bash
+```bash
 cd face-api.js/examples/examples-nodejs
 npm i
 ```
 
-Now run one of the examples using ts-node:
+Şimdi ts-node kullanarak örneklerden birini çalıştırın:
 
-``` bash
+```bash
 ts-node faceDetection.ts
 ```
 
-Or simply compile and run them with node:
+Veya basitçe derleyin ve node ile çalıştırın:
 
-``` bash
+```bash
 tsc faceDetection.ts
 node faceDetection.js
 ```
 
 <a name="face-api.js-for-the-browser"></a>
 
-# face-api.js for the Browser
+# Tarayıcı için face-api.js
 
-Simply include the latest script from [dist/face-api.js](https://github.com/justadudewhohacks/face-api.js/tree/master/dist).
+En son scripti [dist/face-api.js](https://github.com/justadudewhohacks/face-api.js/tree/master/dist) dosyasından dahil edin.
 
-Or install it via npm:
+Veya npm ile yükleyin:
 
-``` bash
+```bash
 npm i face-api.js
 ```
 
 <a name="face-api.js-for-nodejs"></a>
 
-# face-api.js for Nodejs
+# Nodejs için face-api.js
 
-We can use the equivalent API in a nodejs environment by polyfilling some browser specifics, such as HTMLImageElement, HTMLCanvasElement and ImageData. The easiest way to do so is by installing the node-canvas package.
+Bazı tarayıcı spesifiklerini (HTMLImageElement, HTMLCanvasElement ve ImageData gibi) polyfill ederek nodejs ortamında eşdeğer API'yi kullanabiliriz. Bunu yapmanın en kolay yolu, node-canvas paketini yüklemektir.
 
-Alternatively you can simply construct your own tensors from image data and pass tensors as inputs to the API.
+Alternatif olarak, görüntü verilerinden kendi tensörlerinizi oluşturabilir ve API'ye girdiler olarak geçebilirsiniz.
 
-Furthermore you want to install @tensorflow/tfjs-node (not required, but highly recommended), which speeds things up drastically by compiling and binding to the native Tensorflow C++ library:
+Ayrıca, @tensorflow/tfjs-node paketini (gereklilik değil, ama şiddetle tavsiye edilir) yüklemek istersiniz; bu, şeyleri yerel Tensorflow C++ kütüphanesine derleyip bağlayarak büyük ölçüde hızlandırır:
 
-``` bash
+```bash
 npm i face-api.js canvas @tensorflow/tfjs-node
 ```
 
-Now we simply monkey patch the environment to use the polyfills:
+Şimdi çevreyi polyfill'lerle yamalayalım:
 
-``` javascript
-// import nodejs bindings to native tensorflow,
-// not required, but will speed up things drastically (python required)
+```javascript
+// yerel tensorflow'a bağlanan nodejs eklemelerini içe aktarın,
+// gerekli değil, ama şeyleri büyük ölçüde hızlandıracaktır (python gerekli)
 import '@tensorflow/tfjs-node';
 
-// implements nodejs wrappers for HTMLCanvasElement, HTMLImageElement, ImageData
+// HTMLCanvasElement, HTMLImageElement, ImageData için nodejs sarmalayıcılarını uygular
 import * as canvas from 'canvas';
 
 import * as faceapi from 'face-api.js';
 
-// patch nodejs environment, we need to provide an implementation of
-// HTMLCanvasElement and HTMLImageElement
-const { Canvas, Image, ImageData } = canvas
-faceapi.env.monkeyPatch({ Canvas, Image, ImageData })
+// nodejs ortamını yamalayın, HTMLCanvasElement ve HTMLImageElement uygulaması sağlamamız gerekiyor
+const { Canvas, Image, ImageData } = canvas;
+faceapi.env.monkeyPatch({ Canvas, Image, ImageData });
 ```
 
 <a name="getting-started"></a>
 
-# Getting Started
+# Başlarken
 
 <a name="getting-started-loading-models"></a>
 
-## Loading the Models
+## Modellerin Yüklenmesi
 
-All global neural network instances are exported via faceapi.nets:
+Tüm küresel sinir ağı örnekleri faceapi.nets aracılığıyla dışa aktarılır:
 
-``` javascript
+```javascript
 console.log(faceapi.nets)
 // ageGenderNet
 // faceExpressionNet
@@ -163,267 +137,270 @@ console.log(faceapi.nets)
 // tinyYolov2
 ```
 
-To load a model, you have to provide the corresponding manifest.json file as well as the model weight files (shards) as assets. Simply copy them to your public or assets folder. The manifest.json and shard files of a model have to be located in the same directory / accessible under the same route.
+Bir modeli yüklemek için, ilgili manifest.json dosyasını ve model ağırlık dosyalarını (parçaları) varlıklar olarak sağlamanız gerekir. Bunları basitçe public veya assets klasörünüze kopyalayın. Bir modelin manifest.json ve parça dosyaları aynı dizinde bulunmalı / aynı rota altında erişilebilir olmalıdır.
 
-Assuming the models reside in **public/models**:
+Varsayalım modeller **public/models** içinde bulunuyor:
 
-``` javascript
+```javascript
 await faceapi.nets.ssdMobilenetv1.loadFromUri('/models')
-// accordingly for the other models:
+// diğer modeller için de geçerli:
 // await faceapi.nets.faceLandmark68Net.loadFromUri('/models')
 // await faceapi.nets.faceRecognitionNet.loadFromUri('/models')
 // ...
 ```
 
-In a nodejs environment you can furthermore load the models directly from disk:
+Bir nodejs ortamında modelleri doğrudan diskten yükleyebilirsiniz:
 
-``` javascript
+```javascript
 await faceapi.nets.ssdMobilenetv1.loadFromDisk('./models')
 ```
 
-You can also load the model from a tf.NamedTensorMap:
+Ayrıca modeli bir tf.NamedTensorMap'ten de yükleyebilirsiniz:
 
-``` javascript
+```javascript
 await faceapi.nets.ssdMobilenetv1.loadFromWeightMap(weightMap)
 ```
 
-Alternatively, you can also create own instances of the neural nets:
+Alternatif olarak, sinir ağlarının kendi örneklerini oluşturabilirsiniz:
 
-``` javascript
-const net = new faceapi.SsdMobilenetv1()
-await net.loadFromUri('/models')
+```javascript
+const net = new faceapi.SsdMobilenetv1();
+await net.loadFromUri('/models');
 ```
 
-You can also load the weights as a Float32Array (in case you want to use the uncompressed models):
+Ağırlıkları bir Float32Array olarak da yükleyebilirsiniz (sıkıştırılmamış modelleri kullanmak isterseniz):
 
-``` javascript
-// using fetch
+```javascript
+// fetch kullanarak
 net.load(await faceapi.fetchNetWeights('/models/face_detection_model.weights'))
 
-// using axios
-const res = await axios.get('/models/face_detection_model.weights', { responseType: 'arraybuffer' })
-const weights = new Float32Array(res.data)
-net.load(weights)
+// axios kullanarak
+const res = await axios.get('/models/face_detection_model.weights', { responseType: 'arraybuffer' });
+const weights = new Float32Array(res.data);
+net.load(weights);
 ```
 
 <a name="getting-high-level-api"></a>
 
-## High Level API
+## Yüksek Seviyeli API
 
-In the following **input** can be an HTML img, video or canvas element or the id of that element.
+Aşağıda **input** bir HTML img, video veya canvas elementi ya da bu elementin kimliği olabilir.
 
-``` html
+```html
 <img id="myImg" src="images/example.png" />
 <video id="myVideo" src="media/example.mp4" />
-<canvas id="myCanvas" />
+<canvas id="
+
+myCanvas" />
 ```
 
-``` javascript
-const input = document.getElementById('myImg')
+```javascript
+const input = document.getElementById('myImg');
 // const input = document.getElementById('myVideo')
 // const input = document.getElementById('myCanvas')
-// or simply:
+// veya basitçe:
 // const input = 'myImg'
 ```
 
-### Detecting Faces
+### Yüzleri Tespit Etme
 
-Detect all faces in an image. Returns **Array<[FaceDetection](#interface-face-detection)>**:
+Bir görüntüdeki tüm yüzleri tespit edin. **Array<[FaceDetection](#interface-face-detection)>** döndürür:
 
-``` javascript
-const detections = await faceapi.detectAllFaces(input)
+```javascript
+const detections = await faceapi.detectAllFaces(input);
 ```
 
-Detect the face with the highest confidence score in an image. Returns **[FaceDetection](#interface-face-detection) | undefined**:
+Bir görüntüde en yüksek güven puanına sahip yüzü tespit edin. **[FaceDetection](#interface-face-detection) | undefined** döndürür:
 
-``` javascript
-const detection = await faceapi.detectSingleFace(input)
+```javascript
+const detection = await faceapi.detectSingleFace(input);
 ```
 
-By default **detectAllFaces** and **detectSingleFace** utilize the SSD Mobilenet V1 Face Detector. You can specify the face detector by passing the corresponding options object:
+Varsayılan olarak **detectAllFaces** ve **detectSingleFace**, SSD Mobilenet V1 Yüz Dedektörünü kullanır. Yüz dedektörünü, ilgili seçenekler nesnesini geçirerek belirtebilirsiniz:
 
-``` javascript
-const detections1 = await faceapi.detectAllFaces(input, new faceapi.SsdMobilenetv1Options())
-const detections2 = await faceapi.detectAllFaces(input, new faceapi.TinyFaceDetectorOptions())
+```javascript
+const detections1 = await faceapi.detectAllFaces(input, new faceapi.SsdMobilenetv1Options());
+const detections2 = await faceapi.detectAllFaces(input, new faceapi.TinyFaceDetectorOptions());
 ```
 
-You can tune the options of each face detector as shown [here](#getting-started-face-detection-options).
+Her yüz dedektörünün seçeneklerini [burada](#getting-started-face-detection-options) gösterildiği gibi ayarlayabilirsiniz.
 
-### Detecting 68 Face Landmark Points
+### 68 Yüz Landmark Noktasını Tespit Etme
 
-**After face detection, we can furthermore predict the facial landmarks for each detected face as follows:**
+**Yüz tespitinden sonra, her tespit edilen yüz için yüz landmark noktaları tahmin edilebilir:**
 
-Detect all faces in an image + computes 68 Point Face Landmarks for each detected face. Returns **Array<[WithFaceLandmarks<WithFaceDetection<{}>>](#getting-started-utility-classes)>**:
+Bir görüntüdeki tüm yüzleri tespit edin + her tespit edilen yüz için 68 Noktalı Yüz Landmarklarını hesaplayın. **Array<[WithFaceLandmarks<WithFaceDetection<{}>>](#getting-started-utility-classes)>** döndürür:
 
-``` javascript
-const detectionsWithLandmarks = await faceapi.detectAllFaces(input).withFaceLandmarks()
+```javascript
+const detectionsWithLandmarks = await faceapi.detectAllFaces(input).withFaceLandmarks();
 ```
 
-Detect the face with the highest confidence score in an image + computes 68 Point Face Landmarks for that face. Returns **[WithFaceLandmarks<WithFaceDetection<{}>>](#getting-started-utility-classes) | undefined**:
+Bir görüntüde en yüksek güven puanına sahip yüzü tespit edin + bu yüz için 68 Noktalı Yüz Landmarklarını hesaplayın. **[WithFaceLandmarks<WithFaceDetection<{}>>](#getting-started-utility-classes) | undefined** döndürür:
 
-``` javascript
-const detectionWithLandmarks = await faceapi.detectSingleFace(input).withFaceLandmarks()
+```javascript
+const detectionWithLandmarks = await faceapi.detectSingleFace(input).withFaceLandmarks();
 ```
 
-You can also specify to use the tiny model instead of the default model:
+Varsayılan model yerine küçük modeli kullanmayı da belirtebilirsiniz:
 
-``` javascript
-const useTinyModel = true
-const detectionsWithLandmarks = await faceapi.detectAllFaces(input).withFaceLandmarks(useTinyModel)
+```javascript
+const useTinyModel = true;
+const detectionsWithLandmarks = await faceapi.detectAllFaces(input).withFaceLandmarks(useTinyModel);
 ```
 
-### Computing Face Descriptors
+### Yüz Tanımlayıcılarını Hesaplama
 
-**After face detection and facial landmark prediction the face descriptors for each face can be computed as follows:**
+**Yüz tespiti ve yüz landmark tahmininden sonra, her yüz için yüz tanımlayıcıları şu şekilde hesaplanabilir:**
 
-Detect all faces in an image + compute 68 Point Face Landmarks for each detected face. Returns **Array<[WithFaceDescriptor<WithFaceLandmarks<WithFaceDetection<{}>>>](#getting-started-utility-classes)>**:
+Bir görüntüdeki tüm yüzleri tespit edin + her tespit edilen yüz için 68 Noktalı Yüz Landmarklarını hesaplayın. **Array<[WithFaceDescriptor<WithFaceLandmarks<WithFaceDetection<{}>>>](#getting-started-utility-classes)>** döndürür:
 
-``` javascript
-const results = await faceapi.detectAllFaces(input).withFaceLandmarks().withFaceDescriptors()
+```javascript
+const results = await faceapi.detectAllFaces(input).withFaceLandmarks().withFaceDescriptors();
 ```
 
-Detect the face with the highest confidence score in an image + compute 68 Point Face Landmarks and face descriptor for that face. Returns **[WithFaceDescriptor<WithFaceLandmarks<WithFaceDetection<{}>>>](#getting-started-utility-classes) | undefined**:
+Bir görüntüde en yüksek güven puanına sahip yüzü tespit edin + bu yüz için 68 Noktalı Yüz Landmarklarını ve yüz tanımlayıcısını hesaplayın. **[WithFaceDescriptor<WithFaceLandmarks<WithFaceDetection<{}>>>](#getting-started-utility-classes) | undefined** döndürür:
 
-``` javascript
-const result = await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceDescriptor()
+```javascript
+const result = await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceDescriptor();
 ```
 
-### Recognizing Face Expressions
+### Yüz İfadelerini Tanıma
 
-**Face expression recognition can be performed for detected faces as follows:**
+**Yüz ifadelerini tanıma, tespit edilen yüzler için şu şekilde yapılabilir:**
 
-Detect all faces in an image + recognize face expressions of each face. Returns **Array<[WithFaceExpressions<WithFaceLandmarks<WithFaceDetection<{}>>>](#getting-started-utility-classes)>**:
+Bir görüntüdeki tüm yüzleri tespit edin + her yüzün yüz ifadelerini tanıyın. **Array<[WithFaceExpressions<WithFaceLandmarks<WithFaceDetection<{}>>>](#getting-started-utility-classes)>** döndürür:
 
-``` javascript
-const detectionsWithExpressions = await faceapi.detectAllFaces(input).withFaceLandmarks().withFaceExpressions()
+```javascript
+const detectionsWithExpressions = await faceapi.detectAllFaces(input).withFaceLandmarks().withFaceExpressions();
 ```
 
-Detect the face with the highest confidence score in an image + recognize the face expressions for that face. Returns **[WithFaceExpressions<WithFaceLandmarks<WithFaceDetection<{}>>>](#getting-started-utility-classes) | undefined**:
+Bir görüntüde en yüksek güven puanına sahip yüzü tespit edin + bu yüzün yüz ifadelerini tanıyın. **[WithFaceExpressions<WithFaceLandmarks<WithFaceDetection<{}>>>](#getting-started-utility-classes) | undefined** döndürür:
 
-``` javascript
-const detectionWithExpressions = await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceExpressions()
+```javascript
+const detectionWithExpressions = await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceExpressions();
 ```
 
-**You can also skip .withFaceLandmarks(), which will skip the face alignment step (less stable accuracy):**
+**.withFaceLandmarks() adımını atlayabilirsiniz, bu yüz hizalama adımını atlar (daha az kararlı doğruluk):**
 
-Detect all faces without face alignment + recognize face expressions of each face. Returns **Array<[WithFaceExpressions<WithFaceDetection<{}>>](#getting-started-utility-classes)>**:
+Yüz hizalaması olmadan tüm yüzleri tespit edin + her yüzün yüz ifadelerini tanıyın. **Array<[WithFaceExpressions<WithFaceDetection<{}>>](#getting-started-utility-classes)>** döndürür:
 
-``` javascript
-const detectionsWithExpressions = await faceapi.detectAllFaces(input).withFaceExpressions()
+```javascript
+const detectionsWithExpressions = await faceapi.detectAllFaces(input).withFaceExpressions();
 ```
 
-Detect the face with the highest confidence score without face alignment + recognize the face expression for that face. Returns **[WithFaceExpressions<WithFaceDetection<{}>>](#getting-started-utility-classes) | undefined**:
+Yüz hizalaması olmadan en yüksek güven puanına sahip yüzü tespit edin + bu yüzün yüz ifadesini tanıyın. **[WithFaceExpressions<WithFaceDetection<{}>>](#getting-started-utility-classes) | undefined** döndürür:
 
-``` javascript
-const detectionWithExpressions = await faceapi.detectSingleFace(input).withFaceExpressions()
+```javascript
+const detectionWithExpressions = await faceapi.detectSingleFace(input).withFaceExpressions();
 ```
 
-### Age Estimation and Gender Recognition
+### Yaş Tahmini ve Cinsiyet Tanıma
 
-**Age estimation and gender recognition from detected faces can be done as follows:**
+**Yüz tespitinden sonra yaş tahmini ve cinsiyet tanıma şu şekilde yapılabilir:**
 
-Detect all faces in an image + estimate age and recognize gender of each face. Returns **Array<[WithAge<WithGender<WithFaceLandmarks<WithFaceDetection<{}>>>>](#getting-started-utility-classes)>**:
+Bir görüntüdeki tüm yüzleri tespit edin + her yüzün yaşını tahmin edin ve cinsiyetini tanıyın. **Array<[WithAge<WithGender<WithFaceLandmarks<WithFaceDetection<{}>>>>](#getting-started-utility-classes)>** döndürür:
 
-``` javascript
-const detectionsWithAgeAndGender = await faceapi.detectAllFaces(input).withFaceLandmarks().withAgeAndGender()
+```javascript
+const detectionsWithAgeAndGender = await faceapi.detectAllFaces(input).withFaceLandmarks().withAgeAndGender();
 ```
 
-Detect the face with the highest confidence score in an image  + estimate age and recognize gender for that face. Returns **[WithAge<WithGender<WithFaceLandmarks<WithFaceDetection<{}>>>>](#getting-started-utility-classes) | undefined**:
+Bir görüntüde en yüksek güven puanına sahip yüzü tespit edin + bu yüzün yaşını tahmin edin ve cinsiyetini tanıyın. **[WithAge<WithGender<WithFaceLandmarks<WithFaceDetection<{}>>>>](#getting-started-utility-classes) | undefined** döndürür:
 
-``` javascript
-const detectionWithAgeAndGender = await faceapi.detectSingleFace(input).withFaceLandmarks().withAgeAndGender()
+```javascript
+const detectionWithAgeAndGender = await faceapi.detectSingleFace(input).withFaceLandmarks().withAgeAndGender();
 ```
 
-**You can also skip .withFaceLandmarks(), which will skip the face alignment step (less stable accuracy):**
+**.withFaceLandmarks() adımını atlayabilirsiniz, bu yüz hizalama adımını atlar (daha az kararlı doğruluk):**
 
-Detect all faces without face alignment + estimate age and recognize gender of each face. Returns **Array<[WithAge<WithGender<WithFaceDetection<{}>>>](#getting-started-utility-classes)>**:
+Yüz hizalaması olmadan tüm yüzleri tespit edin + her yüzün yaşını tahmin edin ve cinsiyetini tanıyın. **Array<[WithAge<WithGender<WithFaceDetection<{}>>>](#getting-started-utility-classes)>** döndürür:
 
-``` javascript
-const detectionsWithAgeAndGender = await faceapi.detectAllFaces(input).withAgeAndGender()
+```javascript
+const detectionsWithAgeAndGender = await faceapi.detectAllFaces(input).withAgeAndGender();
 ```
 
-Detect the face with the highest confidence score without face alignment + estimate age and recognize gender for that face. Returns **[WithAge<WithGender<WithFaceDetection<{}>>>](#getting-started-utility-classes) | undefined**:
+Yüz hizalaması olmadan en yüksek güven puanına sahip yüzü tespit edin + bu yüzün yaşını tahmin edin ve cinsiyetini tanıyın. **[WithAge<WithGender<WithFaceDetection<{}>>>](#getting-started-utility-classes) | undefined** döndürür:
 
-``` javascript
-const detectionWithAgeAndGender = await faceapi.detectSingleFace(input).withAgeAndGender()
+```javascript
+const detectionWithAgeAndGender = await faceapi.detectSingleFace(input).withAgeAndGender();
 ```
 
-### Composition of Tasks
+### Görevlerin Bileşimi
 
-**Tasks can be composed as follows:**
+**Görevler şu şekilde birleştirilebilir:**
 
-``` javascript
-// all faces
-await faceapi.detectAllFaces(input)
-await faceapi.detectAllFaces(input).withFaceExpressions()
-await faceapi.detectAllFaces(input).withFaceLandmarks()
-await faceapi.detectAllFaces(input).withFaceLandmarks().withFaceExpressions()
-await faceapi.detectAllFaces(input).withFaceLandmarks().withFaceExpressions().withFaceDescriptors()
-await faceapi.detectAllFaces(input).withFaceLandmarks().withAgeAndGender().withFaceDescriptors()
-await faceapi.detectAllFaces(input).withFaceLandmarks().withFaceExpressions().withAgeAndGender().withFaceDescriptors()
+```javascript
+// tüm yüzler
+await faceapi.detectAllFaces(input);
+await faceapi.detectAllFaces(input).withFaceExpressions();
+await faceapi.detectAllFaces(input).withFaceLandmarks();
+await faceapi.detectAllFaces(input).withFaceLandmarks().withFaceExpressions();
+await faceapi.detectAllFaces(input).withFaceLandmarks().withFaceExpressions().withFaceDescriptors();
+await faceapi.detectAllFaces(input).withFaceLandmarks().withAgeAndGender().withFaceDescriptors();
+await faceapi.detectAllFaces(input).withFaceLandmarks().withFaceExpressions().withAgeAndGender().withFaceDescriptors();
 
-// single face
-await faceapi.detectSingleFace(input)
-await faceapi.detectSingleFace(input).withFaceExpressions()
-await faceapi.detectSingleFace(input).withFaceLandmarks()
-await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceExpressions()
-await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceExpressions().withFaceDescriptor()
-await faceapi.detectSingleFace(input).withFaceLandmarks().withAgeAndGender().withFaceDescriptor()
-await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceExpressions().withAgeAndGender().withFaceDescriptor()
+// tek yüz
+await faceapi.detectSingleFace(input);
+await faceapi.detectSingleFace(input).withFaceExpressions();
+await faceapi.detectSingleFace(input).withFaceLandmarks();
+await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceExpressions();
+await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceExpressions().withFaceDescriptor();
+await faceapi.detectSingleFace(input).withFaceLandmarks().withAgeAndGender().withFaceDescriptor();
+await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceExpressions().withAgeAndGender().withFaceDescriptor();
 ```
 
-### Face Recognition by Matching Descriptors
+### Tanımlayıcıları Eşleştirerek Yüz Tanıma
 
-To perform face recognition, one can use faceapi.FaceMatcher to compare reference face descriptors to query face descriptors.
+Yüz tanıma yapmak için, referans yüz tanımlayıcılarını sorgu yüz tanımlayıcılarıyla karşılaştırmak için faceapi.FaceMatcher'ı kullanabilirsiniz.
 
-First, we initialize the FaceMatcher with the reference data, for example we can simply detect faces in a **referenceImage** and match the descriptors of the detected faces to faces of subsequent images:
+Öncelikle, referans verilerle FaceMatcher'ı başlatıyoruz. Örneğin, basitçe bir **referenceImage**'de yüzleri tespit edebilir ve referans görüntüsü için tespit sonuçlarından otomatik olarak atanmış etiketlerle oluşturulan FaceMatcher ile sonuçları eşleştirerek **queryImage1**'de gösterilen kişinin yüzünü tanıyabilirsiniz:
 
-``` javascript
+```javascript
 const results = await faceapi
-  .detectAllFaces(referenceImage)
+  .detectAllFaces(referenceImage
+
+)
   .withFaceLandmarks()
-  .withFaceDescriptors()
+  .withFaceDescriptors();
 
 if (!results.length) {
-  return
+  return;
 }
 
-// create FaceMatcher with automatically assigned labels
-// from the detection results for the reference image
-const faceMatcher = new faceapi.FaceMatcher(results)
+// tespit sonuçlarından otomatik olarak atanmış etiketlerle FaceMatcher oluşturun
+const faceMatcher = new faceapi.FaceMatcher(results);
 ```
 
-Now we can recognize a persons face shown in **queryImage1**:
+Şimdi **queryImage1**'de gösterilen kişinin yüzünü tanıyabiliriz:
 
-``` javascript
+```javascript
 const singleResult = await faceapi
   .detectSingleFace(queryImage1)
   .withFaceLandmarks()
-  .withFaceDescriptor()
+  .withFaceDescriptor();
 
 if (singleResult) {
-  const bestMatch = faceMatcher.findBestMatch(singleResult.descriptor)
-  console.log(bestMatch.toString())
+  const bestMatch = faceMatcher.findBestMatch(singleResult.descriptor);
+  console.log(bestMatch.toString());
 }
 ```
 
-Or we can recognize all faces shown in **queryImage2**:
+Veya **queryImage2**'de gösterilen tüm yüzleri tanıyabiliriz:
 
-``` javascript
+```javascript
 const results = await faceapi
   .detectAllFaces(queryImage2)
   .withFaceLandmarks()
-  .withFaceDescriptors()
+  .withFaceDescriptors();
 
 results.forEach(fd => {
-  const bestMatch = faceMatcher.findBestMatch(fd.descriptor)
-  console.log(bestMatch.toString())
-})
+  const bestMatch = faceMatcher.findBestMatch(fd.descriptor);
+  console.log(bestMatch.toString());
+});
 ```
 
-You can also create labeled reference descriptors as follows:
+Ayrıca şu şekilde etiketli referans tanımlayıcıları oluşturabilirsiniz:
 
-``` javascript
+```javascript
 const labeledDescriptors = [
   new faceapi.LabeledFaceDescriptors(
     'obama',
@@ -433,111 +410,110 @@ const labeledDescriptors = [
     'trump',
     [descriptorTrump]
   )
-]
+];
 
-const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors)
+const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors);
 ```
 
 <a name="getting-started-displaying-detection-results"></a>
 
-## Displaying Detection Results
+## Tespit Sonuçlarını Gösterme
 
-Preparing the overlay canvas:
+Kaplama kanvasını hazırlayın:
 
-``` javascript
-const displaySize = { width: input.width, height: input.height }
-// resize the overlay canvas to the input dimensions
-const canvas = document.getElementById('overlay')
-faceapi.matchDimensions(canvas, displaySize)
+```javascript
+const displaySize = { width: input.width, height: input.height };
+// kaplama kanvasını giriş boyutlarına yeniden boyutlandırın
+const canvas = document.getElementById('overlay');
+faceapi.matchDimensions(canvas, displaySize);
 ```
 
-face-api.js predefines some highlevel drawing functions, which you can utilize:
+face-api.js, kullanabileceğiniz bazı yüksek seviyeli çizim fonksiyonları tanımlar:
 
-``` javascript
-/* Display detected face bounding boxes */
-const detections = await faceapi.detectAllFaces(input)
-// resize the detected boxes in case your displayed image has a different size than the original
-const resizedDetections = faceapi.resizeResults(detections, displaySize)
-// draw detections into the canvas
-faceapi.draw.drawDetections(canvas, resizedDetections)
+```javascript
+/* Tespit edilen yüz sınırlayıcı kutuları göster */
+const detections = await faceapi.detectAllFaces(input);
+// görüntünüz orijinalden farklı bir boyuta sahipse, tespit edilen kutuları yeniden boyutlandırın
+const resizedDetections = faceapi.resizeResults(detections, displaySize);
+// tespitleri kanvasa çizin
+faceapi.draw.drawDetections(canvas, resizedDetections);
 
-/* Display face landmarks */
+/* Yüz landmarklarını göster */
 const detectionsWithLandmarks = await faceapi
   .detectAllFaces(input)
-  .withFaceLandmarks()
-// resize the detected boxes and landmarks in case your displayed image has a different size than the original
-const resizedResults = faceapi.resizeResults(detectionsWithLandmarks, displaySize)
-// draw detections into the canvas
-faceapi.draw.drawDetections(canvas, resizedResults)
-// draw the landmarks into the canvas
-faceapi.draw.drawFaceLandmarks(canvas, resizedResults)
+  .withFaceLandmarks();
+// görüntünüz orijinalden farklı bir boyuta sahipse, tespit edilen kutuları ve landmarkları yeniden boyutlandırın
+const resizedResults = faceapi.resizeResults(detectionsWithLandmarks, displaySize);
+// tespitleri kanvasa çizin
+faceapi.draw.drawDetections(canvas, resizedResults);
+// landmarkları kanvasa çizin
+faceapi.draw.drawFaceLandmarks(canvas, resizedResults);
 
-
-/* Display face expression results */
+/* Yüz ifade sonuçlarını göster */
 const detectionsWithExpressions = await faceapi
   .detectAllFaces(input)
   .withFaceLandmarks()
-  .withFaceExpressions()
-// resize the detected boxes and landmarks in case your displayed image has a different size than the original
-const resizedResults = faceapi.resizeResults(detectionsWithExpressions, displaySize)
-// draw detections into the canvas
-faceapi.draw.drawDetections(canvas, resizedResults)
-// draw a textbox displaying the face expressions with minimum probability into the canvas
-const minProbability = 0.05
-faceapi.draw.drawFaceExpressions(canvas, resizedResults, minProbability)
+  .withFaceExpressions();
+// görüntünüz orijinalden farklı bir boyuta sahipse, tespit edilen kutuları ve landmarkları yeniden boyutlandırın
+const resizedResults = faceapi.resizeResults(detectionsWithExpressions, displaySize);
+// tespitleri kanvasa çizin
+faceapi.draw.drawDetections(canvas, resizedResults);
+// minimum olasılıkla yüz ifadelerini gösteren bir metin kutusu çizin
+const minProbability = 0.05;
+faceapi.draw.drawFaceExpressions(canvas, resizedResults, minProbability);
 ```
 
-You can also draw boxes with custom text ([DrawBox](https://github.com/justadudewhohacks/tfjs-image-recognition-base/blob/master/src/draw/DrawBox.ts)):
+Ayrıca özel metin içeren kutular çizebilirsiniz ([DrawBox](https://github.com/justadudewhohacks/tfjs-image-recognition-base/blob/master/src/draw/DrawBox.ts)):
 
-``` javascript
-const box = { x: 50, y: 50, width: 100, height: 100 }
-// see DrawBoxOptions below
+```javascript
+const box = { x: 50, y: 50, width: 100, height: 100 };
+// Aşağıdaki DrawBoxOptions'a bakın
 const drawOptions = {
-  label: 'Hello I am a box!',
+  label: 'Merhaba, ben bir kutuyum!',
   lineWidth: 2
-}
-const drawBox = new faceapi.draw.DrawBox(box, drawOptions)
-drawBox.draw(document.getElementById('myCanvas'))
+};
+const drawBox = new faceapi.draw.DrawBox(box, drawOptions);
+drawBox.draw(document.getElementById('myCanvas'));
 ```
 
-DrawBox drawing options:
+DrawBox çizim seçenekleri:
 
-``` javascript
+```javascript
 export interface IDrawBoxOptions {
-  boxColor?: string
-  lineWidth?: number
-  drawLabelOptions?: IDrawTextFieldOptions
-  label?: string
+  boxColor?: string;
+  lineWidth?: number;
+  drawLabelOptions?: IDrawTextFieldOptions;
+  label?: string;
 }
 ```
 
-Finally you can draw custom text fields ([DrawTextField](https://github.com/justadudewhohacks/tfjs-image-recognition-base/blob/master/src/draw/DrawTextField.ts)):
+Son olarak, özel metin alanları çizebilirsiniz ([DrawTextField](https://github.com/justadudewhohacks/tfjs-image-recognition-base/blob/master/src/draw/DrawTextField.ts)):
 
-``` javascript
+```javascript
 const text = [
-  'This is a textline!',
-  'This is another textline!'
-]
-const anchor = { x: 200, y: 200 }
-// see DrawTextField below
+  'Bu bir metin satırı!',
+  'Bu başka bir metin satırı!'
+];
+const anchor = { x: 200, y: 200 };
+// Aşağıdaki DrawTextField'a bakın
 const drawOptions = {
   anchorPosition: 'TOP_LEFT',
   backgroundColor: 'rgba(0, 0, 0, 0.5)'
-}
-const drawBox = new faceapi.draw.DrawTextField(text, anchor, drawOptions)
-drawBox.draw(document.getElementById('myCanvas'))
+};
+const drawBox = new faceapi.draw.DrawTextField(text, anchor, drawOptions);
+drawBox.draw(document.getElementById('myCanvas'));
 ```
 
-DrawTextField drawing options:
+DrawTextField çizim seçenekleri:
 
-``` javascript
+```javascript
 export interface IDrawTextFieldOptions {
-  anchorPosition?: AnchorPosition
-  backgroundColor?: string
-  fontColor?: string
-  fontSize?: number
-  fontStyle?: string
-  padding?: number
+  anchorPosition?: AnchorPosition;
+  backgroundColor?: string;
+  fontColor?: string;
+  fontSize?: number;
+  fontStyle?: string;
+  padding?: number;
 }
 
 export enum AnchorPosition {
@@ -550,128 +526,128 @@ export enum AnchorPosition {
 
 <a name="getting-started-face-detection-options"></a>
 
-## Face Detection Options
+## Yüz Tespiti Seçenekleri
 
 ### SsdMobilenetv1Options
 
-``` javascript
+```javascript
 export interface ISsdMobilenetv1Options {
-  // minimum confidence threshold
-  // default: 0.5
-  minConfidence?: number
+  // minimum güven eşiği
+  // varsayılan: 0.5
+  minConfidence?: number;
 
-  // maximum number of faces to return
-  // default: 100
-  maxResults?: number
+  // döndürülecek maksimum yüz sayısı
+  // varsayılan: 100
+  maxResults?: number;
 }
 
-// example
-const options = new faceapi.SsdMobilenetv1Options({ minConfidence: 0.8 })
+// örnek
+const options = new faceapi.SsdMobilenetv1Options({ minConfidence: 0.8 });
 ```
 
 ### TinyFaceDetectorOptions
 
-``` javascript
+```javascript
 export interface ITinyFaceDetectorOptions {
-  // size at which image is processed, the smaller the faster,
-  // but less precise in detecting smaller faces, must be divisible
-  // by 32, common sizes are 128, 160, 224, 320, 416, 512, 608,
-  // for face tracking via webcam I would recommend using smaller sizes,
-  // e.g. 128, 160, for detecting smaller faces use larger sizes, e.g. 512, 608
-  // default: 416
-  inputSize?: number
+  // görüntünün işlendiği boyut, ne kadar küçükse o kadar hızlı,
+  // ancak küçük yüzleri tespit etmekte daha az hassas, 32'nin katı olmalı,
+  // yaygın boyutlar 128, 160, 224, 320, 416, 512, 608'dir,
+  // webcam üzerinden yüz takibi için daha küçük boyutlar kullanmanızı tavsiye ederim,
+  // örn. 128, 160, küçük yüzleri tespit etmek için daha büyük boyutlar kullanın, örn. 512, 608
+  // varsayılan: 416
+  inputSize?: number;
 
-  // minimum confidence threshold
-  // default: 0.5
-  scoreThreshold?: number
+  // minimum güven eşiği
+  // varsayılan: 0.5
+  scoreThreshold?: number;
 }
 
-// example
-const options = new faceapi.TinyFaceDetectorOptions({ inputSize: 320 })
+// örnek
+const options = new faceapi.TinyFaceDetectorOptions({ inputSize: 320 });
 ```
 
 <a name="getting-started-utility-classes"></a>
 
-## Utility Classes
+## Yardımcı Sınıflar
 
 ### IBox
 
-``` javascript
+```javascript
 export interface IBox {
-  x: number
-  y: number
-  width: number
-  height: number
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 }
 ```
 
 ### IFaceDetection
 
-``` javascript
+```javascript
 export interface IFaceDetection {
-  score: number
-  box: Box
+  score: number;
+  box: Box;
 }
 ```
 
 ### IFaceLandmarks
 
-``` javascript
+```javascript
 export interface IFaceLandmarks {
-  positions: Point[]
-  shift: Point
+  positions: Point[];
+  shift: Point;
 }
 ```
 
 ### WithFaceDetection
 
-``` javascript
+```javascript
 export type WithFaceDetection<TSource> = TSource & {
-  detection: FaceDetection
-}
+  detection: FaceDetection;
+};
 ```
 
 ### WithFaceLandmarks
 
-``` javascript
+```javascript
 export type WithFaceLandmarks<TSource> = TSource & {
-  unshiftedLandmarks: FaceLandmarks
-  landmarks: FaceLandmarks
-  alignedRect: FaceDetection
-}
+  unshiftedLandmarks: FaceLandmarks;
+  landmarks: FaceLandmarks;
+  alignedRect: FaceDetection;
+};
 ```
 
 ### WithFaceDescriptor
 
-``` javascript
+```javascript
 export type WithFaceDescriptor<TSource> = TSource & {
-  descriptor: Float32Array
-}
+  descriptor: Float32Array;
+};
 ```
 
 ### WithFaceExpressions
 
-``` javascript
+```javascript
 export type WithFaceExpressions<TSource> = TSource & {
-  expressions: FaceExpressions
-}
+  expressions: FaceExpressions;
+};
 ```
 
 ### WithAge
 
-``` javascript
+```javascript
 export type WithAge<TSource> = TSource & {
-  age: number
-}
+  age: number;
+};
 ```
 
 ### WithGender
 
-``` javascript
+```javascript
 export type WithGender<TSource> = TSource & {
-  gender: Gender
-  genderProbability: number
-}
+  gender: Gender;
+  genderProbability: number;
+};
 
 export enum Gender {
   FEMALE = 'female',
@@ -681,175 +657,179 @@ export enum Gender {
 
 <a name="getting-started-other-useful-utility"></a>
 
-## Other Useful Utility
+## Diğer Yararlı Yardımcı
 
-### Using the Low Level API
+### Düşük Seviyeli API Kullanımı
 
-Instead of using the high level API, you can directly use the forward methods of each neural network:
+Yüksek seviyeli API'yi kullanmak yerine, her sinir ağının ileri yöntemlerini doğrudan kullanabilirsiniz:
 
-``` javascript
-const detections1 = await faceapi.ssdMobilenetv1(input, options)
-const detections2 = await faceapi.tinyFaceDetector(input, options)
-const landmarks1 = await faceapi.detectFaceLandmarks(faceImage)
-const landmarks2 = await faceapi.detectFaceLandmarksTiny(faceImage)
-const descriptor = await faceapi.computeFaceDescriptor(alignedFaceImage)
+```javascript
+const detections1 = await faceapi.ssdMobilenetv1(input, options);
+const detections2 = await faceapi.tinyFaceDetector(input, options);
+const landmarks1 = await faceapi.detectFaceLandmarks(faceImage);
+const landmarks2 = await faceapi.detectFaceLandmarksTiny(faceImage);
+const descriptor = await faceapi.computeFaceDescriptor(alignedFaceImage);
 ```
 
-### Extracting a Canvas for an Image Region
+### Bir Görüntü Bölgesi İçin Kanvas Çıkarma
 
-``` javascript
+```javascript
+
+
 const regionsToExtract = [
   new faceapi.Rect(0, 0, 100, 100)
-]
-// actually extractFaces is meant to extract face regions from bounding boxes
-// but you can also use it to extract any other region
-const canvases = await faceapi.extractFaces(input, regionsToExtract)
+];
+// aslında extractFaces yüz bölgelerini sınırlayıcı kutulardan çıkarmak için tasarlanmıştır,
+// ancak bunu başka herhangi bir bölgeyi çıkarmak için de kullanabilirsiniz
+const canvases = await faceapi.extractFaces(input, regionsToExtract);
 ```
 
-### Euclidean Distance
+### Öklid Mesafesi
 
-``` javascript
-// ment to be used for computing the euclidean distance between two face descriptors
-const dist = faceapi.euclideanDistance([0, 0], [0, 10])
-console.log(dist) // 10
+```javascript
+// iki yüz tanımlayıcısı arasındaki öklid mesafesini hesaplamak için kullanılmak üzere tasarlanmıştır
+const dist = faceapi.euclideanDistance([0, 0], [0, 10]);
+console.log(dist); // 10
 ```
 
-### Retrieve the Face Landmark Points and Contours
+### Yüz Landmark Noktalarını ve Konturlarını Alma
 
-``` javascript
-const landmarkPositions = landmarks.positions
+```javascript
+const landmarkPositions = landmarks.positions;
 
-// or get the positions of individual contours,
-// only available for 68 point face ladnamrks (FaceLandmarks68)
-const jawOutline = landmarks.getJawOutline()
-const nose = landmarks.getNose()
-const mouth = landmarks.getMouth()
-const leftEye = landmarks.getLeftEye()
-const rightEye = landmarks.getRightEye()
-const leftEyeBbrow = landmarks.getLeftEyeBrow()
-const rightEyeBrow = landmarks.getRightEyeBrow()
+// veya bireysel konturların pozisyonlarını alın,
+// yalnızca 68 noktalı yüz landmarkları için mevcut (FaceLandmarks68)
+const jawOutline = landmarks.getJawOutline();
+const nose = landmarks.getNose();
+const mouth = landmarks.getMouth();
+const leftEye = landmarks.getLeftEye();
+const rightEye = landmarks.getRightEye();
+const leftEyeBbrow = landmarks.getLeftEyeBrow();
+const rightEyeBrow = landmarks.getRightEyeBrow();
 ```
 
-### Fetch and Display Images from an URL
+### URL'den Görüntü Alma ve Gösterme
 
-``` html
+```html
 <img id="myImg" src="">
 ```
 
-``` javascript
-const image = await faceapi.fetchImage('/images/example.png')
+```javascript
+const image = await faceapi.fetchImage('/images/example.png');
 
-console.log(image instanceof HTMLImageElement) // true
+console.log(image instanceof HTMLImageElement); // true
 
-// displaying the fetched image content
-const myImg = document.getElementById('myImg')
-myImg.src = image.src
+// alınan görüntü içeriğini gösterme
+const myImg = document.getElementById('myImg');
+myImg.src = image.src;
 ```
 
-### Fetching JSON
+### JSON Alma
 
-``` javascript
-const json = await faceapi.fetchJson('/files/example.json')
+```javascript
+const json = await faceapi.fetchJson('/files/example.json');
 ```
 
-### Creating an Image Picker
+### Bir Görüntü Seçici Oluşturma
 
-``` html
+```html
 <img id="myImg" src="">
 <input id="myFileUpload" type="file" onchange="uploadImage()" accept=".jpg, .jpeg, .png">
 ```
 
-``` javascript
+```javascript
 async function uploadImage() {
-  const imgFile = document.getElementById('myFileUpload').files[0]
-  // create an HTMLImageElement from a Blob
-  const img = await faceapi.bufferToImage(imgFile)
-  document.getElementById('myImg').src = img.src
+  const imgFile = document.getElementById('myFileUpload').files[0];
+  // Bir Blob'dan bir HTMLImageElement oluşturun
+  const img = await faceapi.bufferToImage(imgFile);
+  document.getElementById('myImg').src = img.src;
 }
 ```
 
-### Creating a Canvas Element from an Image or Video Element
+### Bir Görüntü veya Video Elementinden Kanvas Elemanı Oluşturma
 
-``` html
+```html
 <img id="myImg" src="images/example.png" />
 <video id="myVideo" src="media/example.mp4" />
 ```
 
-``` javascript
-const canvas1 = faceapi.createCanvasFromMedia(document.getElementById('myImg'))
-const canvas2 = faceapi.createCanvasFromMedia(document.getElementById('myVideo'))
+```javascript
+const canvas1 = faceapi.createCanvasFromMedia(document.getElementById('myImg'));
+const canvas2 = faceapi.createCanvasFromMedia(document.getElementById('myVideo'));
 ```
 
 <a name="models"></a>
 
-# Available Models
+# Mevcut Modeller
 
 <a name="models-face-detection"></a>
 
-## Face Detection Models
+## Yüz Tespiti Modelleri
 
 ### SSD Mobilenet V1
 
-For face detection, this project implements a SSD (Single Shot Multibox Detector) based on MobileNetV1. The neural net will compute the locations of each face in an image and will return the bounding boxes together with it's probability for each face. This face detector is aiming towards obtaining high accuracy in detecting face bounding boxes instead of low inference time. The size of the quantized model is about 5.4 MB (**ssd_mobilenetv1_model**).
+Yüz tespiti için bu proje, MobileNetV1 tabanlı bir SSD (Single Shot Multibox Detector) uygular. Sinir ağı, bir görüntüdeki her yüzün konumlarını hesaplayacak ve her yüz için sınırlayıcı kutularla birlikte olasılıkları döndürecektir. Bu yüz dedektörü, düşük çalışma süresi yerine yüz sınırlayıcı kutularını tespit etmede yüksek doğruluk elde etmeyi hedefler. Kuantize edilmiş modelin boyutu yaklaşık 5.4 MB'dir (**ssd_mobilenetv1_model**).
 
-The face detection model has been trained on the [WIDERFACE dataset](http://mmlab.ie.cuhk.edu.hk/projects/WIDERFace/) and the weights are provided by [yeephycho](https://github.com/yeephycho) in [this](https://github.com/yeephycho/tensorflow-face-detection) repo.
+Yüz tespiti modeli [WIDERFACE veri seti](http://mmlab.ie.cuhk.edu.hk/projects/WIDERFace/) üzerinde eğitilmiştir ve ağırlıklar [yeephycho](https://github.com/yeephycho) tarafından [bu](https://github.com/yeephycho/tensorflow-face-detection) repo'da sağlanmıştır.
 
 ### Tiny Face Detector
 
-The Tiny Face Detector is a very performant, realtime face detector, which is much faster, smaller and less resource consuming compared to the SSD Mobilenet V1 face detector, in return it performs slightly less well on detecting small faces. This model is extremely mobile and web friendly, thus it should be your GO-TO face detector on mobile devices and resource limited clients. The size of the quantized model is only 190 KB (**tiny_face_detector_model**).
+Tiny Face Detector, SSD Mobilenet V1 yüz dedektörüne kıyasla çok daha hızlı, daha küçük ve daha az kaynak tüketen çok performanslı, gerçek zamanlı bir yüz dedektörüdür. Bu model çok mobil ve web dostudur, dolayısıyla mobil cihazlar ve kaynak sınırlı istemcilerde tercih edilmelidir. Kuantize edilmiş modelin boyutu yalnızca 190 KB'dir (**tiny_face_detector_model**).
 
-The face detector has been trained on a custom dataset of ~14K images labeled with bounding boxes. Furthermore the model has been trained to predict bounding boxes, which entirely cover facial feature points, thus it in general produces better results in combination with subsequent face landmark detection than SSD Mobilenet V1.
+Yüz dedektörü, sınırlayıcı kutularla etiketlenmiş ~14K görüntüden oluşan özel bir veri seti üzerinde eğitilmiştir. Ayrıca, model, genel olarak SSD Mobilenet V1'e kıyasla sonraki yüz landmark tespitiyle birlikte daha iyi sonuçlar üreten sınırlayıcı kutularla yüz özelliği noktalarını tamamen kapsayacak şekilde eğitilmiştir.
 
-This model is basically an even tinier version of Tiny Yolo V2, replacing the regular convolutions of Yolo with depthwise separable convolutions. Yolo is fully convolutional, thus can easily adapt to different input image sizes to trade off accuracy for performance (inference time).
+Bu model, Tiny Yolo V2'nin daha da küçük bir versiyonudur ve Yolo'nun düzenli konvolüsyonlarını derin ayrılabilir konvolüsyonlarla değiştirir. Yolo tamamen konvolüsyoneldir, dolayısıyla farklı giriş görüntü boyutlarına kolayca uyum sağlar ve performans (çalışma süresi) karşılığında doğruluğu değiştirir.
 
 <a name="models-face-landmark-detection"></a>
 
-## 68 Point Face Landmark Detection Models
+## 68 Noktalı Yüz Landmark Tespiti Modelleri
 
-This package implements a very lightweight and fast, yet accurate 68 point face landmark detector. The default model has a size of only 350kb (**face_landmark_68_model**) and the tiny model is only 80kb (**face_landmark_68_tiny_model**). Both models employ the ideas of depthwise separable convolutions as well as densely connected blocks. The models have been trained on a dataset of ~35k face images labeled with 68 face landmark points.
+Bu paket, çok hafif, hızlı ve doğru bir 68 noktalı yüz landmark dedektörü uygular. Varsayılan modelin boyutu yalnızca 350kb'dir (**face_landmark_68_model**) ve küçük model yalnızca 80kb'dir (**face_landmark_68_tiny_model**). Her iki model de derin ayrılabilir konvolüsyonlar ve yoğun bağlantılı blokların fikirlerini kullanır. Modeller, 68 yüz landmark noktalarıyla etiketlenmiş ~35k yüz görüntüsü içeren bir veri seti üzerinde eğitilmiştir.
 
 <a name="models-face-recognition"></a>
 
-## Face Recognition Model
+## Yüz Tanıma Modeli
 
-For face recognition, a ResNet-34 like architecture is implemented to compute a face descriptor (a feature vector with 128 values) from any given face image, which is used to describe the characteristics of a persons face. The model is **not** limited to the set of faces used for training, meaning you can use it for face recognition of any person, for example yourself. You can determine the similarity of two arbitrary faces by comparing their face descriptors, for example by computing the euclidean distance or using any other classifier of your choice.
+Yüz tanıma için, bir yüz görüntüsünden yüz tanımlayıcı (128 değer içeren bir özellik vektörü) hesaplamak için bir ResNet-34 benzeri mimari uygulanmıştır. Bu model, eğitimde kullanılan yüz setiyle sınırlı değildir, bu da onu herhangi bir kişinin yüz tanıması için kullanabileceğiniz anlamına gelir, örneğin kendinizinki. İki rastgele yüzün benzerliğini, örneğin öklid mesafesini hesaplayarak veya tercih ettiğiniz başka bir sınıflandırıcıyı kullanarak belirleyebilirsiniz.
 
-The neural net is equivalent to the **FaceRecognizerNet** used in [face-recognition.js](https://github.com/justadudewhohacks/face-recognition.js) and the net used in the [dlib](https://github.com/davisking/dlib/blob/master/examples/dnn_face_recognition_ex.cpp) face recognition example. The weights have been trained by [davisking](https://github.com/davisking) and the model achieves a prediction accuracy of 99.38% on the LFW (Labeled Faces in the Wild) benchmark for face recognition.
+Sinir ağı, [face-recognition.js](https://github.com/justadudewhohacks/face-recognition.js) kullanılan **FaceRecognizerNet** ile eşdeğerdir ve [dlib](https://github.com/davisking/dlib/blob/master/examples/dnn_face_recognition_ex.cpp) yüz tanıma örneğinde kullanılan sinir ağına eşdeğerdir. Ağırlıklar [davisking](https://github.com/davisking) tarafından eğitilmiştir ve model, yüz tanıma için LFW (Etiketli Yüzler Yaban Hayatta) referans puanında %99.38 doğruluk oranına sahiptir.
 
-The size of the quantized model is roughly 6.2 MB (**face_recognition_model**).
+Kuantize edilmiş modelin boyutu yaklaşık 6.2 MB'dir (**face_recognition_model**).
 
 <a name="models-face-expression-recognition"></a>
 
-## Face Expression Recognition Model
+## Yüz İfade Tanıma Modeli
 
-The face expression recognition model is lightweight, fast and provides reasonable accuracy. The model has a size of roughly 310kb and it employs depthwise separable convolutions and densely connected blocks. It has been trained on a variety of images from publicly available datasets as well as images scraped from the web. Note, that wearing glasses might decrease the accuracy of the prediction results.
+Yüz ifade tanıma modeli hafif, hızlı ve makul bir doğruluk sağlar. Modelin boyutu yaklaşık 310kb'dir ve derin ayrılabilir konvolüsyonlar ve yoğun bağlantılı bloklar kullanır. Model, halka açık veri setlerinden ve web'den kazınan görüntülerden çeşitli görüntüler üzerinde eğitilmiştir. Gözlük takmanın tahmin sonuçlarının doğruluğunu düşürebileceğini unutmayın.
 
 <a name="models-age-and-gender-recognition"></a>
 
-## Age and Gender Recognition Model
+## Yaş ve Cinsiyet Tanıma Modeli
 
-The age and gender recognition model is a multitask network, which employs a feature extraction layer, an age regression layer and a gender classifier. The model has a size of roughly 420kb and the feature extractor employs a tinier but very similar architecture to Xception.
+Yaş ve cinsiyet tanıma modeli, bir özellik çıkarma katmanı, bir yaş regresyon katmanı ve bir cinsiyet sınıflandırıcısı kullanan çoklu görev ağıdır. Modelin boyutu yaklaşık 420kb'dir ve özellik çıkarıcı, Xception'a çok benzer ancak daha küçük bir mimari kullanır.
 
-This model has been trained and tested on the following databases with an 80/20 train/test split each: UTK, FGNET, Chalearn, Wiki, IMDB*, CACD*, MegaAge, MegaAge-Asian. The `*` indicates, that these databases have been algorithmically cleaned up, since the initial databases are very noisy.
+Bu model, UTK, FGNET, Chalearn, Wiki, IMDB*, CACD*, MegaAge, MegaAge-Asian veritabanlarında %80/20'lik bir eğitim/test ayrımıyla eğitilmiş ve test edilmiştir. `*`, bu veritabanlarının algoritmik olarak temizlendiğini gösterir, çünkü başlangıç veritabanları oldukça gürültülüdür.
 
-### Total Test Results
+### Toplam Test Sonuçları
 
-Total MAE (Mean Age Error): **4.54**
+Toplam MAE (Ortalama Yaş Hatası): **4.54**
 
-Total Gender Accuracy: **95%**
+Toplam Cinsiyet Doğruluğu: **%95**
 
-### Test results for each database
+### Her Veritabanı İçin Test Sonuçları
 
-The `-` indicates, that there are no gender labels available for these databases.
+Veritabanlarında cinsiyet etiketleri bulunmadığında `-` kullanılmıştır.
 
-Database        | UTK    | FGNET | Chalearn | Wiki | IMDB* | CACD* | MegaAge | MegaAge-Asian |
+Veritabanı       | UTK    | FGNET | Chalearn | Wiki | IMDB* | CACD* | MegaAge | MegaAge-Asian |
 ----------------|-------:|------:|---------:|-----:|------:|------:|--------:|--------------:|
-MAE             | 5.25   | 4.23  | 6.24     | 6.54 | 3.63  | 3.20  | 6.23    | 4.21          |
-Gender Accuracy | 0.93   | -     | 0.94     | 0.95 | -     | 0.97  | -       | -             |
+MAE             | 5.25   | 4.23  | 6.24     | 6.
 
-### Test results for different age category groups
+54 | 3.63  | 3.20  | 6.23    | 4.21          |
+Cinsiyet Doğruluğu | 0.93   | -     | 0.94     | 0.95 | -     | 0.97  | -       | -             |
 
-Age Range       | 0 - 3  | 4 - 8 | 9 - 18 | 19 - 28 | 29 - 40 | 41 - 60 | 60 - 80 | 80+     |
+### Farklı Yaş Kategorisi Grupları İçin Test Sonuçları
+
+Yaş Aralığı      | 0 - 3  | 4 - 8 | 9 - 18 | 19 - 28 | 29 - 40 | 41 - 60 | 60 - 80 | 80+     |
 ----------------|-------:|------:|-------:|--------:|--------:|--------:|--------:|--------:|
 MAE             | 1.52   | 3.06  | 4.82   | 4.99    | 5.43    | 4.94    | 6.17    | 9.91    |
-Gender Accuracy | 0.69   | 0.80  | 0.88   | 0.96    | 0.97    | 0.97    | 0.96    | 0.9     |
+Cinsiyet Doğruluğu | 0.69   | 0.80  | 0.88   | 0.96    | 0.97    | 0.97    | 0.96    | 0.9     |
