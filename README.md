@@ -816,11 +816,11 @@ MAE             | 1.52   | 3.06  | 4.82   | 4.99    | 5.43    | 4.94    | 6.17  
 Gender Accuracy | 0.69   | 0.80  | 0.88   | 0.96    | 0.97    | 0.97    | 0.96    | 0.9     |
 
 
---
+---
 
 The files added to the project are named `ageGenderRecognitionEmotion.html` and `webcamAgeGenderRecognitionEmotion.html`. These files contain age, gender and facial expression recognition features. `ageGenderRecognitionEmotion.html` performs these detections on an image file, while `webcamAgeGenderRecognitionEmotion.html` performs these detections in real time through a webcam. These files allow you to perform advanced facial analysis in the browser using the `face-api.js` library.
 
---
+---
 
 Changes: `webcamFaceExpressionRecognition.html`
 
