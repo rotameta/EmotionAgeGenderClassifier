@@ -31,7 +31,7 @@ git clone https://github.com/rotameta/EmotionAgeGenderClassifier.git
 ## Running the Browser Examples
 
 ``` bash
-cd face-api.js/examples/examples-browser
+cd EmotionAgeGenderClassifier/examples/examples-browser
 npm i
 npm start
 ```
@@ -41,7 +41,7 @@ Browse to http://localhost:3000/.
 ## Running the Nodejs Examples
 
 ``` bash
-cd face-api.js/examples/examples-nodejs
+cd EmotionAgeGenderClassifier/examples/examples-nodejs
 npm i
 ```
 
