@@ -25,7 +25,7 @@
 Clone the repository:
 
 ``` bash
-git clone https://github.com/justadudewhohacks/face-api.js.git
+https://github.com/rotameta/EmotionAgeGenderClassifier.git
 ```
 
 ## Running the Browser Examples
