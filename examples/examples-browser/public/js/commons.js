@@ -99,6 +99,10 @@ function renderNavBar(navbarId, exampleUri) {
     {
       uri: 'webcam_age_gender_recognition_emotion', // Eklendi
       name: 'Webcam Age, Gender and Emotion Recognition' // Eklendi
+    },
+    {
+      uri: 'webcam_emotion_name_recognition', // Eklendi
+      name: 'Webcam Emotion and Name Recognition' // Eklendi
     }
   ]
 
