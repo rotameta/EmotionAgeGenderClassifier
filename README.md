@@ -835,3 +835,117 @@ Some important changes have been made to this updated file, `webcamFaceExpressio
 3. **Performance Improvements:**
    - The use of the `setTimeout` function has been optimized. The processing time and FPS values for each frame have been updated, providing a smoother and more performant experience.
    - Increased input size (`416 x 416`), resulting in higher accuracy.
+
+---
+
+Added file: `webcamEmotionAndNameRecognition.html`
+
+
+The `webcamEmotionAndNameRecognition.html` file is an interactive web application that uses real-time face detection and recognition via a webcam. It employs the `face-api.js` library to identify faces, recognize emotions, and match faces against a predefined set of known individuals.
+
+#### Key Components
+
+1. **Video Stream**: Captures live video from the user’s webcam and displays it in a video element.
+
+2. **Face Detection**: Detects faces in the video feed using selectable models (SSD Mobilenet V1 or Tiny Face Detector). 
+
+3. **Emotion Recognition**: Analyzes facial expressions to determine and display emotions with confidence scores.
+
+4. **Name Recognition**: Matches detected faces against a predefined list of known individuals and displays the most likely match.
+
+5. **User Controls**:
+   - **Face Detector Selection**: Choose between different face detection models.
+   - **Parameter Adjustment**: Adjust detection parameters such as confidence threshold and input size.
+   - **Bounding Box Toggle**: Show or hide detection bounding boxes on the video feed.
+
+6. **Statistics Display**: Shows average processing time and frames per second (FPS) for face detection.
+
+#### Functionality
+
+- **Model Loading**: Loads necessary face detection and recognition models.
+- **Face Detection and Recognition**: Continuously processes the video feed to detect faces, recognize emotions, and identify names.
+- **UI Updates**: Provides real-time updates on the video feed with detected faces, emotions, and names, along with controls for adjusting settings.
+
+This file is designed to be user-friendly and interactive, making it easy to experiment with face detection models and parameters while providing valuable real-time feedback.
+
+---
+
+### Image Processing Script
+
+This Python script automates the processing of images within a specified directory. The processing involves three primary operations: grayscale conversion, resizing, and saving the images with their original filenames but in PNG format. This script is particularly useful for standardizing image files for applications that require uniform image characteristics.
+
+#### Features
+
+1. **Grayscale Conversion**: Each image is converted to grayscale. This simplifies the image data by reducing it to shades of gray, which can be useful for applications that do not require color information.
+
+2. **Resizing**: All images are resized to a fixed resolution of 150x150 pixels. This ensures that all processed images have consistent dimensions, which is important for maintaining uniformity in datasets or visual displays.
+
+3. **Saving with Original Filenames**: The processed images are saved in PNG format with their original filenames. This avoids confusion about which files have been processed and maintains the naming consistency with the original dataset.
+
+#### Usage Instructions
+
+1. **Prepare Your Image Folder**: Ensure that your images are stored in a folder. For example, place them in a folder named `photos`.
+
+2. **Update the `image_directory` Variable**: In the script, update the `image_directory` variable to the path where your image folder is located. For example:
+   ```python
+   image_directory = '/path/to/your/image/folder'
+   ```
+
+3. **Run the Script**: Execute the script in a Python environment. The script will process each image in the specified directory according to the defined operations.
+
+#### Example
+
+Suppose you have a folder named `leyla` containing the following images:
+- `leyla1.jpg`
+- `leyla2.jpeg`
+
+After running the script, the processed images will be saved in the same directory with the following filenames:
+- `leyla1.png`
+- `leyla2.png`
+
+The script will handle all supported file formats (`.png`, `.jpg`, `.jpeg`), converting them to grayscale, resizing them, and saving them in PNG format with their original names.
+
+#### Code Example
+
+Here is the complete code for the image processing script:
+
+```python
+import os
+from PIL import Image
+
+def process_images(directory):
+    # List all files in the specified directory
+    for filename in os.listdir(directory):
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg')):  # Supported file types
+            file_path = os.path.join(directory, filename)
+            try:
+                # Load the image
+                with Image.open(file_path) as img:
+                    # Convert image to grayscale
+                    gray_image = img.convert('L')
+                    # Resize the image
+                    resized_image = gray_image.resize((150, 150))
+                    # Save the image with the original filename but as PNG format
+                    new_filename = f'{os.path.splitext(filename)[0]}.png'
+                    resized_image.save(os.path.join(directory, new_filename), 'PNG')
+                    print(f'{filename} successfully processed and saved as {new_filename}.')
+            except Exception as e:
+                print(f'An error occurred while processing {filename}: {e}')
+
+# Specify your image directory here
+image_directory = '/path/to/your/image/folder'
+process_images(image_directory)
+```
+
+#### Additional Notes
+
+- **Dependencies**: This script requires the `Pillow` library, which can be installed via pip:
+  ```bash
+  pip install pillow
+  ```
+
+- **Error Handling**: The script includes basic error handling to manage any issues that arise during image processing, such as file read/write errors.
+
+- **Scalability**: The script is designed to handle a directory with multiple image files, making it suitable for batch processing large datasets.
+
+Feel free to modify the script to fit your specific needs or to enhance its functionality.
