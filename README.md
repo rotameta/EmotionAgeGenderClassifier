@@ -25,7 +25,7 @@
 Clone the repository:
 
 ``` bash
-https://github.com/rotameta/EmotionAgeGenderClassifier.git
+git clone https://github.com/rotameta/EmotionAgeGenderClassifier.git
 ```
 
 ## Running the Browser Examples
