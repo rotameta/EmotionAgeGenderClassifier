@@ -67,7 +67,7 @@ Simply include the latest script from [dist/face-api.js](https://github.com/just
 Or install it via npm:
 
 ``` bash
-npm i face-api.js
+npm i EmotionAgeGenderClassifier
 ```
 
 <a name="face-api.js-for-nodejs"></a>
@@ -81,7 +81,7 @@ Alternatively you can simply construct your own tensors from image data and pass
 Furthermore you want to install @tensorflow/tfjs-node (not required, but highly recommended), which speeds things up drastically by compiling and binding to the native Tensorflow C++ library:
 
 ``` bash
-npm i face-api.js canvas @tensorflow/tfjs-node
+npm i EmotionAgeGenderClassifier canvas @tensorflow/tfjs-node
 ```
 
 Now we simply monkey patch the environment to use the polyfills:
